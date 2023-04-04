@@ -13,6 +13,7 @@ while true; do
     if [[ $http_status == "404" ]]; then
       echo "Connection to $url failed with 404 error at $timestamp" >&2
       echo "HTTP Status Code: $http_status" >> $logfile
+      curl -v $url 2>&1 | tee -a $logfile >&2
     else
       echo "Connection to $url failed at $timestamp" >&2
       curl -v $url 2>&1 | tee -a $logfile >&2
