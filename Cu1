@@ -1,0 +1,30 @@
+Yes, I can help you create a Bash script using `curl` to check for new webpages published to a website in the last 1 day. Here's an example script that you can modify to suit your needs:
+
+```bash
+#!/bin/bash
+
+# Set the URL of the website you want to check
+URL="https://example.com"
+
+# Set the time range for the check (in seconds)
+TIME_RANGE=86400 # 1 day
+
+# Get the current date and time in Unix timestamp format
+CURRENT_TIME=$(date +%s)
+
+# Calculate the start time for the check
+START_TIME=$((CURRENT_TIME - TIME_RANGE))
+
+# Use curl to get a list of all the pages on the website
+# and filter the output to include only pages that were modified
+# after the start time of the check
+PAGE_LIST=$(curl -s -L "$URL" | grep -o '<a href=['"'"'"][^"'"'"']*['"'"'"]' | sed -e 's/^<a href=["'"'"']//' -e 's/["'"'"']$//' | awk '{print $1}' | sort | uniq | while read PAGE; do DATE=$(curl -s -L -I "$URL/$PAGE" | grep -i 'Last-Modified:' | awk '{print $3" "$4" "$5" "$6" "$7" "$8}'); if [ -n "$DATE" ]; then PAGE_TIME=$(date --date="$DATE" +%s); if [ "$PAGE_TIME" -ge "$START_TIME" ]; then echo "$PAGE"; fi; fi; done)
+
+# Display the list of pages that were modified in the last 1 day
+echo "Pages modified in the last 1 day:"
+echo "$PAGE_LIST"
+```
+
+This script uses `curl` to retrieve the contents of the website and then uses a combination of `grep`, `sed`, and `awk` to extract the list of pages on the website. It then loops through the list of pages and uses `curl` again to retrieve the `Last-Modified` header for each page. If the `Last-Modified` date is within the specified time range, the script adds the page to a list of modified pages. Finally, the script displays the list of pages that were modified in the last 1 day.
+
+You can modify the `URL` and `TIME_RANGE` variables at the top of the script to suit your needs. Note that the `TIME_RANGE` variable is set in seconds, so you can adjust it to check for a different time range if needed.
