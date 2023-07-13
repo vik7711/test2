@@ -1,0 +1,49 @@
+{
+  "title": "Grafana Landing Page",
+  "editable": false,
+  "hideControls": true,
+  "links": [
+    {
+      "icon": "globe",
+      "tags": [],
+      "title": "Dashboard 1",
+      "type": "dash-db",
+      "url": "/d/dashboard-1",
+      "style": {
+        "background-color": "rgba(0, 123, 255, 0.8)",
+        "color": "#ffffff",
+        "border-radius": "8px"
+      }
+    },
+    {
+      "icon": "chart-line",
+      "tags": [],
+      "title": "Dashboard 2",
+      "type": "dash-db",
+      "url": "/d/dashboard-2",
+      "style": {
+        "background-color": "rgba(255, 193, 7, 0.8)",
+        "color": "#000000",
+        "border-radius": "8px"
+      }
+    },
+    {
+      "icon": "shield-alt",
+      "tags": [],
+      "title": "Dashboard 3",
+      "type": "dash-db",
+      "url": "/d/dashboard-3",
+      "style": {
+        "background-color": "rgba(40, 167, 69, 0.8)",
+        "color": "#ffffff",
+        "border-radius": "8px"
+      }
+    }
+  ],
+  "style": {
+    "background-image": "url('https://example.com/landing-page-background.jpg')",
+    "background-size": "cover",
+    "background-position": "center",
+    "color": "#ffffff"
+  }
+}
